@@ -1,0 +1,25 @@
+.olituka {
+  background: #c79f01;
+}
+
+.dilo {
+  background: #a6ab00;
+}
+
+.sport {
+  background: #4da2db;
+}
+
+.zhyttya {
+  background: #5ac343;
+}
+
+.kultura {
+  background: #e6009e;
+}
+
+.image-style-side {
+  float: right;
+  margin-left: 10px;
+  max-width: 50%;
+}
