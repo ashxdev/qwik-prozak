@@ -2,7 +2,7 @@ import qs from "qs"
 import { get } from "lodash-es"
 import { useLocation } from "@builder.io/qwik-city"
 import { PartnerPost } from "~/components/post/PartnerPost"
-import { useStore, component$, useServerMount$ } from "@builder.io/qwik"
+import { useStore, component$, useTask$ } from "@builder.io/qwik"
 
 export default component$(() => {
   const location = useLocation()
@@ -15,6 +15,7 @@ export default component$(() => {
           $eq: location.params.postSlug
         }
       },
+      sort: ["publishedAt:desc"],
       populate: ["image"]
     },
     {
@@ -22,7 +23,7 @@ export default component$(() => {
     }
   )
 
-  useServerMount$(async () => {
+  useTask$(async () => {
     const response = await fetch(
       `${import.meta.env.VITE_STRAPI_URL}/partner-posts?${query}`
     )

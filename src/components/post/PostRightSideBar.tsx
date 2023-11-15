@@ -1,6 +1,10 @@
 import { component$ } from "@builder.io/qwik"
+import { usePostCategories } from "~/routes/[categorySlug]/[postSlug]/index"
+import CategorySideBarList from "~/components/category/CategorySideBarList.tsx"
 
 export const PostRightSideBar = component$(() => {
+  const categories = usePostCategories()
+
   return (
     <div data-sticky data-margin-top="80" data-sticky-for="991">
       <h4>Поширити</h4>
@@ -10,7 +14,7 @@ export const PostRightSideBar = component$(() => {
             class="nav-link icon-md rounded-circle me-2 mb-2 p-0 fs-5 bg-facebook"
             href="#"
           >
-            <i class="fab fa-facebook-square align-middle"></i>
+            <i class="bi bi-facebook align-middle"></i>
           </a>
         </li>
         <li class="nav-item">
@@ -30,6 +34,7 @@ export const PostRightSideBar = component$(() => {
           </a>
         </li>
       </ul>
+      <CategorySideBarList categories={categories.value} />
       <div class="mt-4">
         <a href="#" class="d-block card-img-flash">
           <img src="/images/adv.png" alt="as" />

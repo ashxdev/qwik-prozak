@@ -1,6 +1,6 @@
 export const FooterHotTopics = () => {
   return (
-    <div class="row">
+    <div class="row d-none">
       <h5 class="mb-2 text-white">Hot topics</h5>
       <ul class="list-inline text-primary-hover lh-lg">
         <li class="list-inline-item">

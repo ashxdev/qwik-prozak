@@ -1,8 +1,11 @@
 import { useDayjs } from "~/composable/useDayjs"
-import { $, component$ } from "@builder.io/qwik"
+import { $, useStore, component$ } from "@builder.io/qwik"
 
 export const HeaderTopMenu = component$(() => {
   const dayjs = useDayjs()
+  const state = useStore({
+    isDarkTheme: false
+  })
 
   const changeZooming = $((fontSize: string) => {
     const doc = document.documentElement
@@ -25,12 +28,14 @@ export const HeaderTopMenu = component$(() => {
     if (!style) return
 
     const changeThemeToDark = () => {
+      state.isDarkTheme = true
       localStorage.setItem("data-theme", "dark")
       style.setAttribute("href", "/styles/style-dark.css")
       document.documentElement.setAttribute("data-theme", "dark")
     }
 
     const changeThemeToLight = () => {
+      state.isDarkTheme = false
       localStorage.setItem("data-theme", "light")
       style.setAttribute("href", "/styles/style.css")
       document.documentElement.setAttribute("data-theme", "light")
@@ -113,7 +118,13 @@ export const HeaderTopMenu = component$(() => {
               id="darkModeSwitch"
               onClick$={changeThemeMode}
             >
-              <div class="switch"></div>
+              <div class="switch">
+                <i
+                  class={`bi bi-${
+                    state.isDarkTheme ? "moon-fill" : "brightness-high"
+                  }`}
+                ></i>
+              </div>
             </div>
 
             <ul class="nav">
@@ -123,7 +134,7 @@ export const HeaderTopMenu = component$(() => {
                   class="nav-link px-2 fs-5"
                   href="https://www.facebook.com/prozak.info"
                 >
-                  <i class="fab fa-facebook-square"></i>
+                  <i class="bi bi-facebook"></i>
                 </a>
               </li>
 
@@ -133,7 +144,7 @@ export const HeaderTopMenu = component$(() => {
                   class="nav-link px-2 fs-5"
                   href="https://www.youtube.com/channel/UCpDjC8hLsxO-AdW7neBV0yg"
                 >
-                  <i class="fab fa-youtube-square"></i>
+                  <i class="bi bi-youtube"></i>
                 </a>
               </li>
             </ul>

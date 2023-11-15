@@ -1,7 +1,7 @@
 import qs from "qs"
 import { PostI } from "~/types"
 import { PostsRow } from "~/components/PostsRow"
-import { useStore, component$, useServerMount$ } from "@builder.io/qwik"
+import { useStore, component$, useTask$ } from "@builder.io/qwik"
 
 export const MainPostRowByCategory = component$(
   (props: { title: string; categorySlug: string }) => {
@@ -12,9 +12,6 @@ export const MainPostRowByCategory = component$(
     const postsQ = qs.stringify(
       {
         filters: {
-          type: {
-            $ne: "main"
-          },
           category: {
             slug: {
               $eq: props.categorySlug
@@ -25,22 +22,30 @@ export const MainPostRowByCategory = component$(
           page: 1,
           pageSize: 8
         },
-        populate: ["image"]
+        sort: ["publishedAt:desc"],
+        populate: ["image", "category"]
       },
       {
         encodeValuesOnly: true
       }
     )
 
-    useServerMount$(async () => {
+    useTask$(async () => {
       const posts = await fetch(
         `${import.meta.env.VITE_STRAPI_URL}/posts?${postsQ}`
       )
 
       const result = await posts.json()
+
       store.posts = result.data
     })
 
-    return <PostsRow posts={store.posts} title={props.title} />
+    return (
+      <PostsRow
+        posts={store.posts}
+        title={props.title}
+        categorySlug={props.categorySlug}
+      />
+    )
   }
 )

@@ -1,15 +1,8 @@
 import qs from "qs"
-import {
-  useStore,
-  component$,
-  useServerMount$,
-  useStylesScoped$
-} from "@builder.io/qwik"
-import styles from "./about-us.css?inline"
 import { DocumentHead } from "@builder.io/qwik-city"
+import { useStore, component$, useTask$ } from "@builder.io/qwik"
 
 export default component$(() => {
-  useStylesScoped$(styles)
   const store = useStore({ page: null } as any)
 
   const query = qs.stringify(
@@ -21,7 +14,7 @@ export default component$(() => {
     }
   )
 
-  useServerMount$(async () => {
+  useTask$(async () => {
     const response = await fetch(
       `${import.meta.env.VITE_STRAPI_URL}/about?${query}`
     )
@@ -78,5 +71,16 @@ export default component$(() => {
 })
 
 export const head: DocumentHead = {
-  title: "Про нас"
+  title: "Про нас - Прозак",
+  meta: [
+    {
+      key: "keywords",
+      content:
+        "Prozak, прозак, портал про Закарпаття, новини, новини Ужгород, прозак, прозак інфо, про закарпаття, прозак інформаційний антидепресант, prozak.info"
+    },
+    {
+      key: "description",
+      content: "Інформаційний портал про Закарпаття"
+    }
+  ]
 }

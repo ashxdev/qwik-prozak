@@ -1,10 +1,121 @@
-import { MainHero } from '~/components/main/MainHero'
-import type { DocumentHead } from '@builder.io/qwik-city'
-import { MainContent } from '~/components/main/MainContent'
-import { MainPostRowByCategory } from '~/components/main/MainPostRowByCategory'
+import qs from "qs"
+import { PostI } from "~/types"
+import { component$ } from "@builder.io/qwik"
+import { routeLoader$ } from "@builder.io/qwik-city"
+import { MainHero } from "~/components/main/MainHero"
+import type { DocumentHead } from "@builder.io/qwik-city"
+import { MainContent } from "~/components/main/MainContent"
+import { MainTrendNews } from "~/components/main/MainTrendNews"
+import { MainPostRowByCategory } from "~/components/main/MainPostRowByCategory"
 
-import { MainTrendNews } from '~/components/main/MainTrendNews'
-import { component$ } from '@builder.io/qwik'
+export const useSocialPosts = routeLoader$(async () => {
+  const socialPostsQ = qs.stringify(
+    {
+      filters: {
+        category: {
+          slug: {
+            $eq: "suspilstvo"
+          }
+        },
+        type: {
+          $ne: "main"
+        }
+      },
+      pagination: {
+        page: 1,
+        pageSize: 6
+      },
+      sort: ["publishedAt:desc"],
+      populate: ["image", "category"]
+    },
+    {
+      encodeValuesOnly: true
+    }
+  )
+
+  const socialPosts = await fetch(
+    `${import.meta.env.VITE_STRAPI_URL}/posts?${socialPostsQ}`
+  )
+  const result = await socialPosts.json()
+  return result.data as PostI[]
+})
+
+export const usePartnerPosts = routeLoader$(async () => {
+  const partnerPostsQ = qs.stringify(
+    {
+      pagination: {
+        page: 1,
+        pageSize: 6
+      },
+      sort: ["publishedAt:desc"],
+      populate: ["image"]
+    },
+    {
+      encodeValuesOnly: true
+    }
+  )
+
+  const partnerPosts = await fetch(
+    `${import.meta.env.VITE_STRAPI_URL}/partner-posts?${partnerPostsQ}`
+  )
+  const resultPartner = await partnerPosts.json()
+  return resultPartner.data as PostI[]
+})
+
+export const useTopPosts = routeLoader$(async () => {
+  const topPostsQ = qs.stringify(
+    {
+      filters: {
+        type: {
+          $eq: "main"
+        }
+      },
+      pagination: {
+        page: 1,
+        pageSize: 4
+      },
+      sort: ["publishedAt:desc"],
+      populate: ["image", "category"]
+    },
+    {
+      encodeValuesOnly: true
+    }
+  )
+
+  const topPosts = await fetch(
+    `${import.meta.env.VITE_STRAPI_URL}/posts?${topPostsQ}`
+  )
+
+  const result = await topPosts.json()
+  return result.data as PostI[]
+})
+
+export const useMainTrendNews = routeLoader$(async () => {
+  const trendQ = qs.stringify(
+    {
+      filters: {
+        type: {
+          $eq: "trend"
+        }
+      },
+      pagination: {
+        start: 0,
+        limit: 3
+      },
+      sort: ["publishedAt:desc"],
+      populate: ["image"]
+    },
+    {
+      encodeValuesOnly: true
+    }
+  )
+
+  const response = await fetch(
+    `${import.meta.env.VITE_STRAPI_URL}/posts?${trendQ}`
+  )
+  const result = await response.json()
+  return result.data
+})
 
 export default component$(() => {
   return (
@@ -23,11 +134,25 @@ export default component$(() => {
         <div class="border-bottom border-primary border-2 opacity-1"></div>
       </div>
 
-      <MainPostRowByCategory title="Спортивні події України та світу" categorySlug="sport" />
+      <MainPostRowByCategory
+        categorySlug="sport"
+        title="Спортивні події України та світу"
+      />
     </>
   )
 })
 
 export const head: DocumentHead = {
-  title: 'Prozak.info'
+  title: "Прозак - Інформаційний антидепресант",
+  meta: [
+    {
+      key: "keywords",
+      content:
+        "Prozak, прозак, портал про Закарпаття, новини, новини Ужгород, прозак, прозак інфо, про закарпаття, прозак інформаційний антидепресант, prozak.info"
+    },
+    {
+      key: "description",
+      content: "Інформаційний портал про Закарпаття"
+    }
+  ]
 }

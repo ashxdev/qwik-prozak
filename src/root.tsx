@@ -1,8 +1,8 @@
 import { component$, useStyles$ } from "@builder.io/qwik"
 import { RouterHead } from "./components/router-head/router-head"
 import {
-  QwikCity,
   RouterOutlet,
+  QwikCityProvider,
   ServiceWorkerRegister
 } from "@builder.io/qwik-city"
 
@@ -18,7 +18,7 @@ export default component$(() => {
   useStyles$(globalStyles)
 
   return (
-    <QwikCity>
+    <QwikCityProvider>
       <head>
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
@@ -28,6 +28,6 @@ export default component$(() => {
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>
-    </QwikCity>
+    </QwikCityProvider>
   )
 })

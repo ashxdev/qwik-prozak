@@ -1,19 +1,30 @@
-import { Category, Homepage } from '~/types'
-import { component$ } from '@builder.io/qwik'
-import { HeaderMainMenuSubItem } from './HeaderMainMenuSubItem'
+import { clsx } from "clsx"
+import { CategoryI, Homepage } from "~/types"
+import { useStore, component$ } from "@builder.io/qwik"
+import { HeaderMainMenuSubItem } from "./HeaderMainMenuSubItem"
 
 interface HeaderProps {
-  categories?: Category[]
   homepage: Homepage
+  categories?: CategoryI[]
 }
 
 export const HeaderMainMenu = component$((props: HeaderProps) => {
+  const store = useStore({ isShowMobileMenu: false })
+
   return (
     <nav class="navbar navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand" href="/">
-          <img class="navbar-brand-item light-mode-item" src="/logo.png" alt="logo" />
-          <img class="navbar-brand-item dark-mode-item" src="/logo.png" alt="logo" />
+          <img
+            class="navbar-brand-item light-mode-item"
+            src="/logo.png"
+            alt="logo"
+          />
+          <img
+            class="navbar-brand-item dark-mode-item"
+            src="/logo.png"
+            alt="logo"
+          />
         </a>
 
         <button
@@ -21,23 +32,39 @@ export const HeaderMainMenu = component$((props: HeaderProps) => {
           type="button"
           aria-expanded="false"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
           aria-label="Toggle navigation"
+          aria-controls="navbarCollapse"
+          data-bs-target="#navbarCollapse"
+          onClick$={() => (store.isShowMobileMenu = !store.isShowMobileMenu)}
         >
-          <span class="text-body h6 d-none d-sm-inline-block">Menu</span>
+          <span class="text-body h6 d-none d-sm-inline-block">Меню</span>
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div
+          class={clsx([
+            "collapse navbar-collapse",
+            { show: store.isShowMobileMenu }
+          ])}
+          id="navbarCollapse"
+        >
           <ul class="navbar-nav navbar-nav-scroll mx-auto">
             <li class="nav-item">
               <a class="nav-link" href="/">
                 Головна
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/all-posts">
+                Усі новини
+              </a>
+            </li>
             {props.categories?.map((item) => (
-              <HeaderMainMenuSubItem category={item} homepage={props.homepage} />
+              <HeaderMainMenuSubItem
+                key={item.id}
+                category={item}
+                homepage={props.homepage}
+              />
             ))}
           </ul>
         </div>

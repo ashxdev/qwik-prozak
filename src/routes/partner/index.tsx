@@ -1,28 +1,72 @@
-import { useLocation } from "@builder.io/qwik-city"
-import { component$ } from "@builder.io/qwik"
+import qs from "qs"
+import { CategoryI, PostI } from "~/types"
+import { routeLoader$ } from "@builder.io/qwik-city"
+import Category from "~/components/category/Category"
+import type { DocumentHead } from "@builder.io/qwik-city"
+import { component$, Resource, useSignal } from "@builder.io/qwik"
+
+type PartnerPostsData = { posts: PostI[]; category: CategoryI }
+
+export const useGetPostData = routeLoader$(async () => {
+  const postsQ = qs.stringify(
+    {
+      sort: ["publish_date:desc"],
+      pagination: {
+        page: 1,
+        pageSize: 6
+      },
+      populate: ["image", "category"]
+    },
+    {
+      encodeValuesOnly: true
+    }
+  )
+
+  const posts = await fetch(
+    `${import.meta.env.VITE_STRAPI_URL}/partner-posts?${postsQ}`
+  )
+  const result = await posts.json()
+
+  const category = {
+    id: 308,
+    attributes: {
+      name: "Новини партнерів",
+      slug: "partner",
+      createdAt: "",
+      updatedAt: "",
+      publishedAt: "",
+      description: "",
+      short_description: ""
+    }
+  }
+
+  return { posts: result.data, category }
+})
 
 export default component$(() => {
-  const location = useLocation()
+  const getPostData = useGetPostData()
+  const partnerPostsData = useSignal<PartnerPostsData>(getPostData.value || [])
 
   return (
-    <div>
-      <h1>SKU cate</h1>
-      <p>Pathname: {location.pathname}</p>
-      <p>Sku Id: {location.params.categorySlug}</p>
-    </div>
+    <Resource
+      value={partnerPostsData}
+      onPending={() => <div>Loading...</div>}
+      onResolved={({ posts, category }) => (
+        <Category partner posts={posts} category={category} />
+      )}
+    />
   )
 })
 
-/*
- <Category :data="category.data[0].attributes"  :articles="articles.data" />
-
-const { data: category } = await useFetch(
-  `${import.meta.env.VITE_STRAPI_URL}/categories?filters[slug]=${route.params.categoryslug}`,
-  { pick: ["data"] }
-);
-
-const { data: articles } = await useFetch(
-  `${import.meta.env.VITE_STRAPI_URL}/articles?filters[category][slug][$eq]=${route.params.categoryslug}&populate[0]=image`,
-  { pick: ["data"] }
-);
- */
+export const head: DocumentHead = () => {
+  return {
+    title: "Новини партнерів - Прозак",
+    meta: [
+      { key: "keywords", content: "новини партнерів прозак" },
+      {
+        key: "description",
+        content: "Новини партнерів"
+      }
+    ]
+  }
+}

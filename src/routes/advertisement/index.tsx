@@ -1,10 +1,7 @@
-import styles from "./advertisement.css?inline"
+import { component$ } from "@builder.io/qwik"
 import { DocumentHead } from "@builder.io/qwik-city"
-import { component$, useStylesScoped$ } from "@builder.io/qwik"
 
 export default component$(() => {
-  useStylesScoped$(styles)
-
   return (
     <>
       <section>
@@ -72,5 +69,16 @@ export default component$(() => {
 })
 
 export const head: DocumentHead = {
-  title: "Контакти - Прозак"
+  title: "Реклама - Прозак",
+  meta: [
+    {
+      key: "keywords",
+      content:
+        "Prozak, прозак, портал про Закарпаття, новини, новини Ужгород, прозак, прозак інфо, про закарпаття, прозак інформаційний антидепресант, prozak.info"
+    },
+    {
+      key: "description",
+      content: "Інформаційний портал про Закарпаття"
+    }
+  ]
 }

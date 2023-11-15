@@ -8,14 +8,14 @@ export interface PostI {
     createdAt: string
     updatedAt: string
     publishedAt: string
-    image?: Image
-    category: { data: Category }
-    sub_category: { data: SubCategory }
+    publish_date: string
+    image?: ImageI
+    category: { data: CategoryI }
   }
   id: number
 }
 
-export interface Image {
+export interface ImageI {
   data?: {
     attributes: {
       name: string
@@ -38,30 +38,16 @@ export interface Image {
   }
 }
 
-export interface Category {
+export interface CategoryI {
   id: number
   attributes: {
     name: string
-    description: string
     slug: string
     createdAt: string
     updatedAt: string
     publishedAt: string
-    sub_categories: {
-      data: SubCategory[]
-    }
-  }
-}
-
-export interface SubCategory {
-  id: number
-  attributes: {
-    name: string
     description: string
-    slug: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
+    short_description: string
   }
 }
 

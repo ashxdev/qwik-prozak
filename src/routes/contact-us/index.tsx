@@ -72,5 +72,16 @@ export default component$(() => {
 })
 
 export const head: DocumentHead = {
-  title: "Контакти - Прозак"
+  title: "Контакти - Прозак",
+  meta: [
+    {
+      key: "keywords",
+      content:
+        "Prozak, прозак, портал про Закарпаття, новини, новини Ужгород, прозак, прозак інфо, про закарпаття, прозак інформаційний антидепресант, prozak.info"
+    },
+    {
+      key: "description",
+      content: "Інформаційний портал про Закарпаття"
+    }
+  ]
 }

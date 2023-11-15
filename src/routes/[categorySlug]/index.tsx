@@ -1,28 +1,113 @@
-import { useLocation } from "@builder.io/qwik-city"
-import { component$ } from "@builder.io/qwik"
+import qs from "qs"
+import { get } from "lodash-es"
+import { PostI, CategoryI } from "~/types"
+import { routeLoader$ } from "@builder.io/qwik-city"
+import Category from "~/components/category/Category"
+import type { DocumentHead } from "@builder.io/qwik-city"
+import { component$, Resource, useSignal } from "@builder.io/qwik"
+
+type CategoryData = { posts: PostI[]; category: CategoryI }
+
+export const useCategories = routeLoader$(async (requestEvent) => {
+  const categoriesQ = qs.stringify(
+    {
+      filters: {
+        slug: {
+          $ne: requestEvent.params.categorySlug
+        }
+      },
+      populate: ["image"]
+    },
+    {
+      encodeValuesOnly: true
+    }
+  )
+
+  const categories = await fetch(
+    `${import.meta.env.VITE_STRAPI_URL}/categories?${categoriesQ}`
+  )
+  const result = await categories.json()
+  return result.data as CategoryI[]
+})
+
+export const useGetCategoryData = routeLoader$(async (event) => {
+  const postsQ = qs.stringify(
+    {
+      sort: ["publish_date:desc"],
+      filters: {
+        category: {
+          slug: {
+            $eq: event.params.categorySlug
+          }
+        }
+      },
+      pagination: {
+        page: 1,
+        pageSize: 6
+      },
+      populate: ["image", "category"]
+    },
+    {
+      encodeValuesOnly: true
+    }
+  )
+
+  const categoryQ = qs.stringify(
+    {
+      filters: {
+        slug: {
+          $eq: event.params.categorySlug
+        }
+      },
+      populate: ["image"]
+    },
+    {
+      encodeValuesOnly: true
+    }
+  )
+
+  const posts = await fetch(
+    `${import.meta.env.VITE_STRAPI_URL}/posts?${postsQ}`
+  )
+  const result = await posts.json()
+
+  const category = await fetch(
+    `${import.meta.env.VITE_STRAPI_URL}/categories?${categoryQ}`
+  )
+  const categoryResult = await category.json()
+
+  return {
+    posts: result.data,
+    category: get(categoryResult.data, 0)
+  }
+})
 
 export default component$(() => {
-  const location = useLocation()
+  const getCategoryData = useGetCategoryData()
+  const categoryData = useSignal<CategoryData>(getCategoryData.value || [])
 
   return (
-    <div>
-      <h1>SKU cate</h1>
-      <p>Pathname: {location.pathname}</p>
-      <p>Sku Id: {location.params.categorySlug}</p>
-    </div>
+    <Resource
+      value={categoryData}
+      onPending={() => <div>Loading...</div>}
+      onResolved={({ posts, category }) => (
+        <Category posts={posts} category={category} partner={false} />
+      )}
+    />
   )
 })
 
-/*
- <Category :data="category.data[0].attributes"  :articles="articles.data" />
+export const head: DocumentHead = ({ resolveValue }) => {
+  const data = resolveValue(useGetCategoryData)
 
-const { data: category } = await useFetch(
-  `${import.meta.env.VITE_STRAPI_URL}/categories?filters[slug]=${route.params.categoryslug}`,
-  { pick: ["data"] }
-);
-
-const { data: articles } = await useFetch(
-  `${import.meta.env.VITE_STRAPI_URL}/articles?filters[category][slug][$eq]=${route.params.categoryslug}&populate[0]=image`,
-  { pick: ["data"] }
-);
- */
+  return {
+    title: `${data?.category?.attributes?.name} - Прозак`,
+    meta: [
+      { content: data?.category?.attributes?.name, key: "keywords" },
+      {
+        content: data?.category?.attributes?.short_description,
+        key: "description"
+      }
+    ]
+  }
+}

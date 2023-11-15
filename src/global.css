@@ -5,3 +5,26 @@
  * the styles in here will be applied to the Document, without any sort of CSS scoping.
  *
  */
+.politika {
+  background: #c79f01;
+}
+
+.dilo {
+  background: #a6ab00;
+}
+
+.sport {
+  background: #4da2db;
+}
+
+.zdorov-ya {
+  background: #5ac343;
+}
+
+.dozvillya {
+  background: #e6009e;
+}
+
+.suspilstvo {
+  background: #fc7000;
+}
