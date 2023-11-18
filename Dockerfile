@@ -5,8 +5,8 @@ FROM node:19.2-alpine3.15 as build
 WORKDIR /usr/src/app
 
 # Copy the package.json and package-lock.json over in the intermedate "build" image
-COPY package.json ./
-COPY package-lock.json ./
+COPY ./package.json ./
+COPY ./package-lock.json ./
 
 # Install the dependencies
 # Clean install because we want to install the exact versions
