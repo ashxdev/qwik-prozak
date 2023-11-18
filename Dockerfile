@@ -1,5 +1,5 @@
 # Intermediate docker image to build the bundle in and install dependencies
-FROM node:19.2-alpine3.15 as build
+FROM node:18.16.0-alpine3.17 as build
 
 # Set the working directory to /usr/src/app
 WORKDIR /usr/src/app
@@ -7,6 +7,7 @@ WORKDIR /usr/src/app
 # Copy the package.json and package-lock.json over in the intermedate "build" image
 COPY ./package.json ./
 COPY ./package-lock.json ./
+
 
 # Install the dependencies
 # Clean install because we want to install the exact versions
@@ -19,7 +20,7 @@ COPY ./ ./
 RUN npm run build
 
 # Pull the same Node image and use it as the final (production image)
-FROM node:19.2-alpine3.15 as production
+FROM node:18.16.0-alpine3.17 as production
 
 # Set the working directory to /usr/src/app
 WORKDIR /usr/src/app
