@@ -21,7 +21,6 @@ import { join } from "node:path"
 import qs from "qs"
 import fetch from "node-fetch"
 import { v4 as uuidv4 } from "uuid"
-import compression from "compression"
 
 declare global {
   interface QwikCityPlatform extends PlatformNode {}
@@ -34,7 +33,7 @@ const distDir = join(fileURLToPath(import.meta.url), "..", "..", "dist")
 const buildDir = join(distDir, "build")
 
 // Allow for dynamic port
-const PORT = process.env.PORT ?? 3008
+const PORT = process.env.PORT ?? 3000
 
 // Create the Qwik City Node middleware
 const { router, notFound } = createQwikCity({
