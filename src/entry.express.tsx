@@ -127,12 +127,17 @@ app.get("/rss", async (_, res) => {
   )
 
   async function getPosts() {
-    const response = await fetch(
-      `${import.meta.env.VITE_STRAPI_URL}/api/posts?${postsQ}`
-    )
-    const result = (await response.json()) as any
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_STRAPI_URL}/api/posts?${postsQ}`
+      )
+      const result = (await response.json()) as any
 
-    return result?.data || []
+      return result?.data || []
+    } catch (e) {
+      console.log("url", import.meta.env.VITE_STRAPI_URL)
+      console.log(e)
+    }
   }
 
   function buildRssItems(items: any) {
