@@ -11,7 +11,7 @@
     "build.preview": "vite build --ssr src/entry.preview.tsx",
     "build.server": "vite build -c adapters/express/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
-    "deploy": "node server/entry.express",
+    "deploy": "ORIGIN=https://coolify.dance-line.studio node server/entry.express",
     "dev": "vite --mode ssr",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
     "fmt": "prettier --write .",
