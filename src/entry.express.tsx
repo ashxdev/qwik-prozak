@@ -34,7 +34,8 @@ const { router, notFound } = createQwikCity({
   render,
   qwikCityPlan,
   manifest,
-  checkOrigin: false
+  checkOrigin: false,
+  debug: true
 })
 
 // Create the express server
