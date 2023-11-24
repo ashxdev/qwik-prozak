@@ -57,6 +57,11 @@ app.use(router)
 // Use Qwik City's 404 handler
 app.use(notFound)
 
+fetch("https://quotes.toscrape.com/random")
+  .then((response) => response.text())
+  .then((body) => {
+    console.log(body)
+  })
 // Start the express server
 app.listen(PORT, () => {
   /* eslint-disable */
