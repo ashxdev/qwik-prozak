@@ -55,7 +55,7 @@ const app = express()
 // Use Qwik City's 404 handler
 app.use(notFound)
 
-app.get("test", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello World!")
 })
 
