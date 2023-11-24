@@ -50,7 +50,7 @@ const app = express()
 //app.use(express.static(distDir, { redirect: false }))
 
 // Use Qwik City's page and endpoint request handler
-//app.use(router)
+app.use(router)
 
 // Use Qwik City's 404 handler
 app.use(notFound)
