@@ -38,7 +38,7 @@ const { router, notFound } = createQwikCity({
   debug: true
 })
 
-console.log(router)
+console.dir(router)
 
 // Create the express server
 // https://expressjs.com/
