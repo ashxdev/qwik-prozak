@@ -57,8 +57,6 @@ app.use(router)
 // Use Qwik City's 404 handler
 app.use(notFound)
 
-app.use()
-
 app.get("/test", (req, res) => {
   res.send("Hello World!")
 })
