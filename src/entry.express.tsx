@@ -17,7 +17,6 @@ import render from "./entry.ssr"
 import express from "express"
 import { fileURLToPath } from "node:url"
 import { join } from "node:path"
-import cors from "cors"
 
 declare global {
   interface QwikCityPlatform extends PlatformNode {}
@@ -42,22 +41,21 @@ const { router, notFound } = createQwikCity({
 // Create the express server
 // https://expressjs.com/
 const app = express()
-app.use(cors())
 // Enable gzip compression
 // app.use(compression());
 
 // Static asset handlers
 // https://expressjs.com/en/starter/static-files.html
-app.use(`/build`, express.static(buildDir, { immutable: true, maxAge: "1y" }))
-app.use(express.static(distDir, { redirect: false }))
+//app.use(`/build`, express.static(buildDir, { immutable: true, maxAge: "1y" }))
+//app.use(express.static(distDir, { redirect: false }))
 
 // Use Qwik City's page and endpoint request handler
-app.use(router)
+//app.use(router)
 
 // Use Qwik City's 404 handler
 app.use(notFound)
 
-app.get("/test", (req, res) => {
+app.get("test", (req, res) => {
   res.send("Hello World!")
 })
 
