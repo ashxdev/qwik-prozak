@@ -24,7 +24,9 @@ declare global {
 
 // Directories where the static assets are located
 const distDir = join(fileURLToPath(import.meta.url), "..", "..", "dist")
+console.log(distDir)
 const buildDir = join(distDir, "build")
+console.log(buildDir)
 
 // Allow for dynamic port
 const PORT = process.env.PORT ?? 3000
@@ -38,7 +40,7 @@ const { router, notFound } = createQwikCity({
   debug: true
 })
 
-console.dir(router)
+console.log(router)
 
 // Create the express server
 // https://expressjs.com/
