@@ -7,8 +7,13 @@
  * - https://qwik.builder.io/docs/deployments/node/
  *
  */
-import { type PlatformNode } from "@builder.io/qwik-city/middleware/node"
-
+import {
+  createQwikCity,
+  type PlatformNode
+} from "@builder.io/qwik-city/middleware/node"
+import qwikCityPlan from "@qwik-city-plan"
+import { manifest } from "@qwik-client-manifest"
+import render from "./entry.ssr"
 import express from "express"
 import { fileURLToPath } from "node:url"
 import { join } from "node:path"
@@ -19,22 +24,41 @@ declare global {
 
 // Directories where the static assets are located
 const distDir = join(fileURLToPath(import.meta.url), "..", "..", "dist")
-console.log(distDir)
 const buildDir = join(distDir, "build")
-console.log(buildDir)
 
 // Allow for dynamic port
 const PORT = process.env.PORT ?? 3000
 
 // Create the Qwik City Node middleware
+const { router, notFound } = createQwikCity({
+  render,
+  qwikCityPlan,
+  manifest,
+  checkOrigin: false,
+  debug: true
+})
 
 // Create the express server
 // https://expressjs.com/
 const app = express()
-
 app.get("/", (req, res) => {
   res.send("Hello World!")
 })
+// Enable gzip compression
+// app.use(compression());
+
+// Static asset handlers
+// https://expressjs.com/en/starter/static-files.html
+console.log("bbuildDir", buildDir)
+app.use(`/build`, express.static(buildDir, { immutable: true, maxAge: "1y" }))
+/* app.use(express.static(distDir, { redirect: false }))
+
+// Use Qwik City's page and endpoint request handler
+app.use(router)
+
+// Use Qwik City's 404 handler
+app.use(notFound) */
+
 // Start the express server
 app.listen(PORT, () => {
   /* eslint-disable */
