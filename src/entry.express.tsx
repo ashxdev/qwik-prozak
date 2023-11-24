@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 // https://expressjs.com/en/starter/static-files.html
 console.log("bbuildDir", buildDir)
 app.use(`/build`, express.static(buildDir, { immutable: true, maxAge: "1y" }))
-/* app.use(express.static(distDir, { redirect: false }))
+app.use(express.static(distDir, { redirect: false }))
 
 // Use Qwik City's page and endpoint request handler
 app.use(router)
