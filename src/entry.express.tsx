@@ -57,7 +57,7 @@ app.use(express.static(distDir, { redirect: false }))
 app.use(router)
 
 // Use Qwik City's 404 handler
-app.use(notFound) */
+app.use(notFound)
 
 // Start the express server
 app.listen(PORT, () => {
