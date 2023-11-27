@@ -1,6 +1,6 @@
-import { nodeServerAdapter } from "@builder.io/qwik-city/adapters/node-server/vite"
-import { extendConfig } from "@builder.io/qwik-city/vite"
-import baseConfig from "../../vite.config"
+import { nodeServerAdapter } from "@builder.io/qwik-city/adapters/node-server/vite";
+import { extendConfig } from "@builder.io/qwik-city/vite";
+import baseConfig from "../../vite.config";
 
 export default extendConfig(baseConfig, () => {
   return {
@@ -11,5 +11,5 @@ export default extendConfig(baseConfig, () => {
       },
     },
     plugins: [nodeServerAdapter({ name: "express" })],
-  }
-})
+  };
+});

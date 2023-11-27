@@ -1,7 +1,7 @@
 /**
  * WHAT IS THIS FILE?
  *
- * SSR entry point, in all cases the application is render outside the browser, this
+ * SSR entry point, in all cases the application is rendered outside the browser, this
  * entry point will be the common one.
  *
  * - Server (express, cloudflare...)
@@ -12,10 +12,10 @@
  */
 import {
   renderToStream,
-  type RenderToStreamOptions
-} from "@builder.io/qwik/server"
-import { manifest } from "@qwik-client-manifest"
-import Root from "./root"
+  type RenderToStreamOptions,
+} from "@builder.io/qwik/server";
+import { manifest } from "@qwik-client-manifest";
+import Root from "./root";
 
 export default function (opts: RenderToStreamOptions) {
   return renderToStream(<Root />, {
@@ -24,7 +24,7 @@ export default function (opts: RenderToStreamOptions) {
     // Use container attributes to set attributes on the html tag.
     containerAttributes: {
       lang: "en-us",
-      ...opts.containerAttributes
-    }
-  })
+      ...opts.containerAttributes,
+    },
+  });
 }

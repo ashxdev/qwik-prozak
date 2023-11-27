@@ -1,158 +1,112 @@
-import qs from "qs"
-import { PostI } from "~/types"
-import { component$ } from "@builder.io/qwik"
-import { routeLoader$ } from "@builder.io/qwik-city"
-import { MainHero } from "~/components/main/MainHero"
-import type { DocumentHead } from "@builder.io/qwik-city"
-import { MainContent } from "~/components/main/MainContent"
-import { MainTrendNews } from "~/components/main/MainTrendNews"
-import { MainPostRowByCategory } from "~/components/main/MainPostRowByCategory"
+import { component$ } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
 
-export const useSocialPosts = routeLoader$(async () => {
-  const socialPostsQ = qs.stringify(
-    {
-      filters: {
-        category: {
-          slug: {
-            $eq: "suspilstvo"
-          }
-        },
-        type: {
-          $ne: "main"
-        }
-      },
-      pagination: {
-        page: 1,
-        pageSize: 6
-      },
-      sort: ["publishedAt:desc"],
-      populate: ["image", "category"]
-    },
-    {
-      encodeValuesOnly: true
-    }
-  )
-
-  const socialPosts = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/posts?${socialPostsQ}`
-  )
-  const result = await socialPosts.json()
-  return result.data as PostI[]
-})
-
-export const usePartnerPosts = routeLoader$(async () => {
-  const partnerPostsQ = qs.stringify(
-    {
-      pagination: {
-        page: 1,
-        pageSize: 6
-      },
-      sort: ["publishedAt:desc"],
-      populate: ["image"]
-    },
-    {
-      encodeValuesOnly: true
-    }
-  )
-
-  const partnerPosts = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/partner-posts?${partnerPostsQ}`
-  )
-  const resultPartner = await partnerPosts.json()
-  return resultPartner.data as PostI[]
-})
-
-export const useTopPosts = routeLoader$(async () => {
-  const topPostsQ = qs.stringify(
-    {
-      filters: {
-        type: {
-          $eq: "main"
-        }
-      },
-      pagination: {
-        page: 1,
-        pageSize: 4
-      },
-      sort: ["publishedAt:desc"],
-      populate: ["image", "category"]
-    },
-    {
-      encodeValuesOnly: true
-    }
-  )
-
-  const topPosts = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/posts?${topPostsQ}`
-  )
-
-  const result = await topPosts.json()
-  return result.data as PostI[]
-})
-
-export const useMainTrendNews = routeLoader$(async () => {
-  const trendQ = qs.stringify(
-    {
-      filters: {
-        type: {
-          $eq: "trend"
-        }
-      },
-      pagination: {
-        start: 0,
-        limit: 3
-      },
-      sort: ["publishedAt:desc"],
-      populate: ["image"]
-    },
-    {
-      encodeValuesOnly: true
-    }
-  )
-
-  const response = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/posts?${trendQ}`
-  )
-  const result = await response.json()
-  return result.data
-})
+import Counter from "~/components/starter/counter/counter";
+import Hero from "~/components/starter/hero/hero";
+import Infobox from "~/components/starter/infobox/infobox";
+import Starter from "~/components/starter/next-steps/next-steps";
 
 export default component$(() => {
   return (
     <>
-      <MainTrendNews />
+      <Hero />
+      <Starter />
 
-      <MainHero />
+      <div role="presentation" class="ellipsis"></div>
+      <div role="presentation" class="ellipsis ellipsis-purple"></div>
 
-      <div class="container">
-        <div class="border-bottom border-primary border-2 opacity-1"></div>
+      <div class="container container-center container-spacing-xl">
+        <h3>
+          You can <span class="highlight">count</span>
+          <br /> on me
+        </h3>
+        <Counter />
       </div>
 
-      <MainContent />
+      <div class="container container-flex">
+        <Infobox>
+          <div q:slot="title" class="icon icon-cli">
+            CLI Commands
+          </div>
+          <>
+            <p>
+              <code>npm run dev</code>
+              <br />
+              Starts the development server and watches for changes
+            </p>
+            <p>
+              <code>npm run preview</code>
+              <br />
+              Creates production build and starts a server to preview it
+            </p>
+            <p>
+              <code>npm run build</code>
+              <br />
+              Creates production build
+            </p>
+            <p>
+              <code>npm run qwik add</code>
+              <br />
+              Runs the qwik CLI to add integrations
+            </p>
+          </>
+        </Infobox>
 
-      <div class="container">
-        <div class="border-bottom border-primary border-2 opacity-1"></div>
+        <div>
+          <Infobox>
+            <div q:slot="title" class="icon icon-apps">
+              Example Apps
+            </div>
+            <p>
+              Have a look at the <a href="/demo/flower">Flower App</a> or the{" "}
+              <a href="/demo/todolist">Todo App</a>.
+            </p>
+          </Infobox>
+
+          <Infobox>
+            <div q:slot="title" class="icon icon-community">
+              Community
+            </div>
+            <ul>
+              <li>
+                <span>Questions or just want to say hi? </span>
+                <a href="https://qwik.builder.io/chat" target="_blank">
+                  Chat on discord!
+                </a>
+              </li>
+              <li>
+                <span>Follow </span>
+                <a href="https://twitter.com/QwikDev" target="_blank">
+                  @QwikDev
+                </a>
+                <span> on Twitter</span>
+              </li>
+              <li>
+                <span>Open issues and contribute on </span>
+                <a href="https://github.com/BuilderIO/qwik" target="_blank">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <span>Watch </span>
+                <a href="https://qwik.builder.io/media/" target="_blank">
+                  Presentations, Podcasts, Videos, etc.
+                </a>
+              </li>
+            </ul>
+          </Infobox>
+        </div>
       </div>
-
-      <MainPostRowByCategory
-        categorySlug="sport"
-        title="Спортивні події України та світу"
-      />
     </>
-  )
-})
+  );
+});
 
 export const head: DocumentHead = {
-  title: "Прозак - Інформаційний антидепресант",
+  title: "Welcome to Qwik",
   meta: [
     {
-      key: "keywords",
-      content:
-        "Prozak, прозак, портал про Закарпаття, новини, новини Ужгород, прозак, прозак інфо, про закарпаття, прозак інформаційний антидепресант, prozak.info"
+      name: "description",
+      content: "Qwik site description",
     },
-    {
-      key: "description",
-      content: "Інформаційний портал про Закарпаття"
-    }
-  ]
-}
+  ],
+};
