@@ -11,7 +11,7 @@ env:
   IMAGE_NAME: "ashxdev/qwik-prozak"
 
 jobs:
-  amd64:
+  main:
     runs-on: ubuntu-latest
     permissions:
       contents: read
