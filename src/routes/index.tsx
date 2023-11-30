@@ -120,24 +120,13 @@ export const useMainTrendNews = routeLoader$(async () => {
 export default component$(() => {
   return (
     <>
-      <MainTrendNews />
-
-      <MainHero />
-
       <div class="container">
         <div class="border-bottom border-primary border-2 opacity-1"></div>
       </div>
 
-      <MainContent />
-
       <div class="container">
         <div class="border-bottom border-primary border-2 opacity-1"></div>
       </div>
-
-      <MainPostRowByCategory
-        categorySlug="sport"
-        title="Спортивні події України та світу"
-      />
     </>
   )
 })
