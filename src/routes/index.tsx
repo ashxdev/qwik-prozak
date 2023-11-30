@@ -2,11 +2,7 @@ import qs from "qs"
 import { PostI } from "~/types"
 import { component$ } from "@builder.io/qwik"
 import { routeLoader$ } from "@builder.io/qwik-city"
-import { MainHero } from "~/components/main/MainHero"
 import type { DocumentHead } from "@builder.io/qwik-city"
-import { MainContent } from "~/components/main/MainContent"
-import { MainTrendNews } from "~/components/main/MainTrendNews"
-import { MainPostRowByCategory } from "~/components/main/MainPostRowByCategory"
 
 export const useSocialPosts = routeLoader$(async () => {
   const socialPostsQ = qs.stringify(
