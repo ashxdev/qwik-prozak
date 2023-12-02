@@ -27,7 +27,7 @@ export const TheFooter = component$(
 
     useTask$(async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_STRAPI_URL}/posts?${recentPostsQ}`
+        `${import.meta.env.VITE_STRAPI_DOCKER_URL}/posts?${recentPostsQ}`
       )
       const result = await response.json()
       store.recentPosts = result.data

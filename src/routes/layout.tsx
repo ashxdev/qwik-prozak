@@ -17,7 +17,7 @@ export const useHomePage = routeLoader$(async () => {
   )
 
   const homepage = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/homepage?${homepageQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/homepage?${homepageQ}`
   )
   const homepageResult = await homepage.json()
   return homepageResult.data as Homepage
@@ -29,7 +29,7 @@ export const useCategories = routeLoader$(async () => {
   })
 
   const categories = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/categories?${categoriesQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/categories?${categoriesQ}`
   )
   const result = await categories.json()
   return result.data as CategoryI[]
@@ -46,7 +46,7 @@ export const useMainCategories = routeLoader$(async () => {
   )
 
   const categories = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/categories?${mainCategoriesQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/categories?${mainCategoriesQ}`
   )
   const result = await categories.json()
   return result.data as CategoryI[]

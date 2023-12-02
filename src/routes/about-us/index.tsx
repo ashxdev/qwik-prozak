@@ -16,7 +16,7 @@ export default component$(() => {
 
   useTask$(async () => {
     const response = await fetch(
-      `${import.meta.env.VITE_STRAPI_URL}/about?${query}`
+      `${import.meta.env.VITE_STRAPI_DOCKER_URL}/about?${query}`
     )
     const result = await response.json()
     store.page = result.data

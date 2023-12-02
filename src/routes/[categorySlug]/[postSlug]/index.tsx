@@ -25,7 +25,7 @@ export const usePostCategories = routeLoader$(async (requestEvent) => {
   )
 
   const categories = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/categories?${categoriesQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/categories?${categoriesQ}`
   )
   const result = await categories.json()
   return result.data as CategoryI[]
@@ -47,7 +47,7 @@ export const useGetPostData = routeLoader$(async (event) => {
   )
 
   const response = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/posts?${query}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/posts?${query}`
   )
   const result = await response.json()
   const post = get(result.data, "[0]")

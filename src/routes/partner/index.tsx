@@ -23,7 +23,7 @@ export const useGetPostData = routeLoader$(async () => {
   )
 
   const posts = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/partner-posts?${postsQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/partner-posts?${postsQ}`
   )
   const result = await posts.json()
 

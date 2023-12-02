@@ -32,7 +32,7 @@ export const MainPostRowByCategory = component$(
 
     useTask$(async () => {
       const posts = await fetch(
-        `${import.meta.env.VITE_STRAPI_URL}/posts?${postsQ}`
+        `${import.meta.env.VITE_STRAPI_DOCKER_URL}/posts?${postsQ}`
       )
 
       const result = await posts.json()

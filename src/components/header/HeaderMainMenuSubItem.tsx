@@ -41,7 +41,9 @@ export const HeaderMainMenuSubItem = component$((props: Props) => {
 
     store.loading = true
 
-    const res = await fetch(`${import.meta.env.VITE_STRAPI_URL}/posts?${query}`)
+    const res = await fetch(
+      `${import.meta.env.VITE_STRAPI_PUBLIC_URL}/posts?${query}`
+    )
 
     const result = await res.json()
 

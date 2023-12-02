@@ -24,7 +24,7 @@ export const useCategories = routeLoader$(async (requestEvent) => {
   )
 
   const categories = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/categories?${categoriesQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/categories?${categoriesQ}`
   )
   const result = await categories.json()
   return result.data as CategoryI[]
@@ -67,12 +67,12 @@ export const useGetCategoryData = routeLoader$(async (event) => {
   )
 
   const posts = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/posts?${postsQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/posts?${postsQ}`
   )
   const result = await posts.json()
 
   const category = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/categories?${categoryQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/categories?${categoryQ}`
   )
   const categoryResult = await category.json()
 

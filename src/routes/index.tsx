@@ -34,7 +34,7 @@ export const useSocialPosts = routeLoader$(async () => {
   )
 
   const socialPosts = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/posts?${socialPostsQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/posts?${socialPostsQ}`
   )
   const result = await socialPosts.json()
   return result.data as PostI[]
@@ -56,7 +56,7 @@ export const usePartnerPosts = routeLoader$(async () => {
   )
 
   const partnerPosts = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/partner-posts?${partnerPostsQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/partner-posts?${partnerPostsQ}`
   )
   const resultPartner = await partnerPosts.json()
   return resultPartner.data as PostI[]
@@ -83,7 +83,7 @@ export const useTopPosts = routeLoader$(async () => {
   )
 
   const topPosts = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/posts?${topPostsQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/posts?${topPostsQ}`
   )
 
   const result = await topPosts.json()
@@ -111,7 +111,7 @@ export const useMainTrendNews = routeLoader$(async () => {
   )
 
   const response = await fetch(
-    `${import.meta.env.VITE_STRAPI_URL}/posts?${trendQ}`
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/posts?${trendQ}`
   )
   const result = await response.json()
   return result.data
