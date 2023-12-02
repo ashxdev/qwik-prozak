@@ -187,6 +187,13 @@ app.use(router)
 // Use Qwik City's 404 handler
 app.use(notFound)
 
+console.log("import.meta.env.VITE_STRAPI_URL")
+fetch(`${import.meta.env.VITE_STRAPI_URL}/posts}`)
+  .then((response) => response.text())
+  .then((body) => {
+    console.log(body)
+  })
+
 // Start the express server
 app.listen(PORT, () => {
   /* eslint-disable */
