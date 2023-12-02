@@ -126,7 +126,8 @@ app.get("/rss", async (_, res) => {
       encodeValuesOnly: true
     }
   )
-
+  console.log("import.meta.env.VITE_STRAPI_URL")
+  console.log(import.meta.env.VITE_STRAPI_URL)
   async function getPosts() {
     const response = await fetch(
       `${import.meta.env.VITE_STRAPI_URL}/posts?${postsQ}`
