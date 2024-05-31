@@ -1,11 +1,18 @@
 import qs from "qs"
 import { CategoryI, PostI } from "~/types"
+import { useCategories } from "~/shared/loaders"
 import { routeLoader$ } from "@builder.io/qwik-city"
 import Category from "~/components/category/Category"
 import type { DocumentHead } from "@builder.io/qwik-city"
 import { component$, Resource, useSignal } from "@builder.io/qwik"
 
-type PartnerPostsData = { posts: PostI[]; category: CategoryI }
+type PartnerPostsData = {
+  posts: PostI[]
+  category: CategoryI
+  categories: CategoryI[]
+}
+
+export { useCategories } from "~/shared/loaders"
 
 export const useGetPostData = routeLoader$(async () => {
   const postsQ = qs.stringify(
@@ -44,15 +51,24 @@ export const useGetPostData = routeLoader$(async () => {
 })
 
 export default component$(() => {
+  const categories = useCategories()
   const getPostData = useGetPostData()
-  const partnerPostsData = useSignal<PartnerPostsData>(getPostData.value || [])
+  const partnerPostsData = useSignal<PartnerPostsData>({
+    ...getPostData.value,
+    categories: categories.value
+  })
 
   return (
     <Resource
       value={partnerPostsData}
       onPending={() => <div>Loading...</div>}
       onResolved={({ posts, category }) => (
-        <Category partner posts={posts} category={category} />
+        <Category
+          partner
+          posts={posts}
+          category={category}
+          categories={categories.value}
+        />
       )}
     />
   )

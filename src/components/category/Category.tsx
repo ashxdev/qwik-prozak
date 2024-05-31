@@ -5,7 +5,12 @@ import CategorySideBar from "~/components/category/CategorySideBar"
 import { PreviewMidSquareSizePost } from "~/components/preview/PreviewMidSquareSizePost"
 
 export default component$(
-  (props: { partner: boolean; posts: PostI[]; category: CategoryI }) => {
+  (props: {
+    posts: PostI[]
+    partner: boolean
+    category: CategoryI
+    categories: CategoryI[]
+  }) => {
     const { postStyle } = usePostStyle(props.category?.attributes.slug)
 
     return (
@@ -100,6 +105,7 @@ export default component$(
 
               <div class="col-lg-3 mt-5 mt-lg-0">
                 <CategorySideBar
+                  categories={props.categories}
                   categorySlug={props.category?.attributes.slug}
                 />
               </div>

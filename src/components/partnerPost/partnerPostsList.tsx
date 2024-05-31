@@ -18,7 +18,11 @@ export const PartnerPostsList = component$(
       <>
         <div class="row">
           <div class="col-12 col-sm-6 col-lg-12">
-            <h4 class="mt-4 mb-3">Новини партнерів</h4>
+            <h4 class="mt-4 mb-3">
+              <a href="/partner" class="btn-link text-reset fw-bold">
+                Новини партнерів
+              </a>
+            </h4>
             {props.partnerPosts?.map((item: PostI) => (
               <div key={item.id} class="card mb-3">
                 <div class="row g-3">
