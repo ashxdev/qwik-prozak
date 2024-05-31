@@ -29,7 +29,7 @@ export const PartnerPost = component$((props: { data: PostI }) => {
               >
                 <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
                   <div class="w-100 my-auto">
-                    <a href="/partner" class="badge  mb-2">
+                    <a href="/Novini-partneriv" class="badge  mb-2">
                       <i class="bi bi-circle-fill me-2 small fw-bold"></i>
                       Новини партнерів
                     </a>
@@ -54,7 +54,7 @@ export const PartnerPost = component$((props: { data: PostI }) => {
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <a href="/partner" class="badge  mb-2">
+              <a href="/Novini-partneriv" class="badge  mb-2">
                 <i class="bi bi-circle-fill me-2 small fw-bold"></i>
                 Новини партнерів
               </a>
