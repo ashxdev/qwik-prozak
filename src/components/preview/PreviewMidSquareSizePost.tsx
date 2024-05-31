@@ -1,4 +1,5 @@
 import { PostI } from "~/types"
+import { get } from "lodash-es"
 import { useDayjs } from "~/composable/useDayjs"
 
 export const PreviewMidSquareSizePost = (props: {
@@ -14,13 +15,20 @@ export const PreviewMidSquareSizePost = (props: {
     ? "Партенери"
     : props.post?.attributes?.category?.data.attributes.name
 
+  const getImageSrc = (item: PostI) =>
+    get(
+      item,
+      "attributes.image.data.attributes.url",
+      "/images/blog/1by1/thumb/01.jpg"
+    )
+
   return (
     <div class="card">
       <div class="position-relative">
         <img
           class="card-img"
-          src={props.post?.attributes.image?.data?.attributes?.url}
-          alt="Card image"
+          src={getImageSrc(props.post)}
+          alt={props.post.attributes.name}
         />
         <div class="card-img-overlay d-flex align-items-start flex-column p-3">
           <div class="w-100 mt-auto">
@@ -43,7 +51,15 @@ export const PreviewMidSquareSizePost = (props: {
             {props.post.attributes.name}
           </a>
         </h4>
-        <p class="card-text">{props.post.attributes.short_description}</p>
+        <p class="card-text">
+          {props.post.attributes.short_description
+            ?.slice(0, 308)
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">")
+            .replace(/&amp;nbsp;/g, "")
+            .replace(/<\/?[^>]+(>|$)/g, "")}
+          ...
+        </p>
         <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
           <li class="nav-item">
             {dayjs(props.post?.attributes.publish_date).format(

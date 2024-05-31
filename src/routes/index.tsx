@@ -47,7 +47,7 @@ export const usePartnerPosts = routeLoader$(async () => {
         page: 1,
         pageSize: 6
       },
-      sort: ["publishedAt:desc"],
+      sort: ["publishedAt:asc"],
       populate: ["image"]
     },
     {
