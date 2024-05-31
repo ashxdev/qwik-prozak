@@ -7,7 +7,7 @@ export const PreviewXsSizePost = (props: { post: PostI }) => {
         <img
           class="card-img"
           alt="Card image"
-          src={props.post?.attributes.image?.data?.attributes?.url}
+          src={props.post?.attributes?.image?.data?.attributes?.url}
         />
         <div class="card-img-overlay d-flex align-items-start flex-column p-3">
           <div class="w-100 mb-auto d-flex justify-content-end"></div>

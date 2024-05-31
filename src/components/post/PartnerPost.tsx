@@ -2,7 +2,7 @@ import { PostI } from "~/types"
 import { get } from "lodash-es"
 import styles from "./post.css?inline"
 import { useDayjs } from "~/composable/useDayjs"
-import { PostRightSideBar } from "./PostRightSideBar"
+import { PartnerPostRightSideBar } from "../partnerPost/PartnerPostRightSideBar"
 import { component$, useStyles$ } from "@builder.io/qwik"
 
 export const PartnerPost = component$((props: { data: PostI }) => {
@@ -82,10 +82,9 @@ export const PartnerPost = component$((props: { data: PostI }) => {
               class="col-lg-9 mb-5"
               dangerouslySetInnerHTML={props.data?.attributes?.description}
             ></div>
-            <hr />
 
             <div class="col-lg-3">
-              <PostRightSideBar />
+              <PartnerPostRightSideBar />
             </div>
           </div>
         </div>

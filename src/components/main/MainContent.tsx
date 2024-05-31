@@ -1,13 +1,13 @@
-import { useDayjs } from "~/composable/useDayjs"
 import { useMainCategories } from "~/routes/layout.tsx"
 import { useSocialPosts, usePartnerPosts } from "../../routes/index.tsx"
 
 import { component$ } from "@builder.io/qwik"
+import { PartnerPostsList } from "~/components/partnerPost/partnerPostsList"
 import { SideBarCategoryList } from "~/components/side-bar/SideBarCategoryList"
+
 import { PreviewMidSquareSizePost } from "~/components/preview/PreviewMidSquareSizePost"
 
 export const MainContent = component$(() => {
-  const dayjs = useDayjs()
   const socialPosts = useSocialPosts()
   const partnerPosts = usePartnerPosts()
   const mainCategories = useMainCategories()
@@ -67,52 +67,7 @@ export const MainContent = component$(() => {
               </div>
 
               <SideBarCategoryList categories={mainCategories.value} />
-
-              <div class="row">
-                <div class="col-12 col-sm-6 col-lg-12">
-                  <h4 class="mt-4 mb-3">Новини партнерів</h4>
-                  {partnerPosts.value?.map((item) => (
-                    <div key={item.id} class="card mb-3">
-                      <div class="row g-3">
-                        <div class="col-4">
-                          <img
-                            class="rounded"
-                            src={item.attributes.image?.data?.attributes?.url}
-                            alt=""
-                          />
-                        </div>
-                        <div class="col-8">
-                          <h6>
-                            <a
-                              href={`/partner/${item.attributes.slug}`}
-                              class="btn-link stretched-link text-reset fw-bold"
-                            >
-                              {item?.attributes.name}
-                            </a>
-                          </h6>
-                          <div class="small mt-1">
-                            {dayjs(item.attributes.publish_date).format(
-                              "H:mm | DD MMMM "
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div class="col-12 col-sm-6 col-lg-12 my-4">
-                  <a href="#" class="d-block card-img-flash">
-                    <img src="/images/adv.png" alt="" />
-                  </a>
-                  <div class="smaller text-end mt-2">
-                    ads via{" "}
-                    <a href="#" class="text-body">
-                      <u>Bootstrap</u>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <PartnerPostsList partnerPosts={partnerPosts.value} />
             </div>
           </div>
         </div>
