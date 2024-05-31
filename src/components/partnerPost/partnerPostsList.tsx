@@ -19,7 +19,7 @@ export const PartnerPostsList = component$(
         <div class="row">
           <div class="col-12 col-sm-6 col-lg-12">
             <h4 class="mt-4 mb-3">
-              <a href="/partner" class="btn-link text-reset fw-bold">
+              <a href="/Novini-partneriv" class="btn-link text-reset fw-bold">
                 Новини партнерів
               </a>
             </h4>
@@ -36,7 +36,7 @@ export const PartnerPostsList = component$(
                   <div class="col-8">
                     <h6>
                       <a
-                        href={`/partner/${item.attributes.slug}`}
+                        href={`/Novini-partneriv/${item.attributes.slug}`}
                         class="btn-link stretched-link text-reset fw-bold"
                       >
                         {item?.attributes.name}
