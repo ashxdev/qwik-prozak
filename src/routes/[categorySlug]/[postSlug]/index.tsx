@@ -3,7 +3,7 @@ import { get } from "lodash-es"
 import { PostI, CategoryI } from "~/types"
 import { Post } from "~/components/post/Post"
 import { routeLoader$ } from "@builder.io/qwik-city"
-import { LegacyPost } from "~/components/post/LegacyPost"
+import { LegacyPost2 } from "~/components/post/LegacyPost2"
 import type { DocumentHead } from "@builder.io/qwik-city"
 import { component$, useSignal, Resource } from "@builder.io/qwik"
 
@@ -54,16 +54,28 @@ export const useGetPostData = routeLoader$(async (event) => {
 
   if (post) return { post, legacyPost: "" }
 
-  // try to get post from legacy site
-  const responseFromLegacySite = await fetch(
-    `http://legacy.prozak.info/${event.params.categorySlug}/${event.params.postSlug}`
+  const legacyQuery = qs.stringify(
+    {
+      filters: {
+        slug: {
+          $contains: event.params.postSlug
+        }
+      },
+      populate: ["image"]
+    },
+    {
+      encodeValuesOnly: true
+    }
   )
-  const legacyPostHtml = (await responseFromLegacySite.text()) || ""
 
+  const legacyResponse = await fetch(
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/legacy-posts?${legacyQuery}`
+  )
+  const legacyResult = await legacyResponse.json()
+  const legacyPost = get(legacyResult.data, "[0]")
   return {
     post,
-    // @ts-expect-error
-    legacyPost: /<article.*?>([\s\S]*)<\/article>/.exec(legacyPostHtml)[1]
+    legacyPost
   }
 })
 
@@ -76,9 +88,7 @@ export default component$(() => {
       value={postData}
       onPending={() => <div>Loading...</div>}
       onResolved={({ post, legacyPost }) => (
-        <>
-          {post ? <Post data={post} /> : <LegacyPost legacyPost={legacyPost} />}
-        </>
+        <>{post ? <Post data={post} /> : <LegacyPost2 data={legacyPost} />}</>
       )}
     />
   )
@@ -89,8 +99,7 @@ export const head: DocumentHead = ({ resolveValue }) => {
 
   // legacy title
   if (!data?.post) {
-    // @ts-expect-error
-    const title = /<h1.*?>([\s\S]*)<\/h1>/.exec(data?.legacyPost)[1]
+    const title = /<h1.*?>([\s\S]*)<\/h1>/.exec(data?.legacyPost)
 
     return {
       title: `${title} - Прозак`,
