@@ -7,7 +7,7 @@ import { LegacyPost2 } from "~/components/post/LegacyPost2"
 import type { DocumentHead } from "@builder.io/qwik-city"
 import { component$, useSignal, Resource } from "@builder.io/qwik"
 
-type PostData = { post: PostI | null; legacyPost: string }
+type PostData = { post: PostI | null; legacyPost: PostI }
 
 export const usePostCategories = routeLoader$(async (requestEvent) => {
   const categoriesQ = qs.stringify(
