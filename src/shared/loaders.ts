@@ -28,7 +28,7 @@ export const useCategories = routeLoader$(async (requestEvent) => {
 export const useGetCategoryData = routeLoader$(async (event) => {
     const postsQ = qs.stringify(
         {
-            sort: ["publish_date:asc"],
+            sort: ["publish_date:desc"],
             filters: {
                 category: {
                     slug: {
@@ -38,7 +38,7 @@ export const useGetCategoryData = routeLoader$(async (event) => {
             },
             pagination: {
                 page: 1,
-                pageSize: 6
+                pageSize: 30
             },
             populate: ["image", "category"]
         },

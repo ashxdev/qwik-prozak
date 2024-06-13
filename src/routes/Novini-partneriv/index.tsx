@@ -20,7 +20,7 @@ export const useGetPostData = routeLoader$(async () => {
       sort: ["publish_date:desc"],
       pagination: {
         page: 1,
-        pageSize: 6
+        pageSize: 30
       },
       populate: ["image", "category"]
     },

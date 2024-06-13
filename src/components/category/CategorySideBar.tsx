@@ -12,15 +12,11 @@ export default component$(
         <CategorySideBarList categories={props.categories} />
         <div class="col-12 col-sm-6 col-lg-12 my-4">
           <a href="#" class="d-block card-img-flash">
-            <img src="assets/images/adv.png" alt="adv" />
+            <img src="/images/adv.png" alt="adv" />
           </a>
-          <div class="smaller text-end mt-2">
-            <a
-              href="http://legacy.prozak.info"
-              target="_blank"
-              class="text-muted"
-            >
-              <u>Архів новини</u>
+          <div class="text-end mt-2">
+            <a href="/all-posts" class="text-muted">
+              <u>Усі новини</u>
             </a>
           </div>
         </div>

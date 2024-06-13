@@ -15,7 +15,7 @@ export const useGetAllPost = routeLoader$(async () => {
       sort: ["publish_date:desc"],
       pagination: {
         page: 1,
-        pageSize: 6
+        pageSize: 100
       },
       populate: ["image", "category"]
     },
