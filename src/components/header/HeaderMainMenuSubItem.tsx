@@ -26,9 +26,9 @@ export const HeaderMainMenuSubItem = component$((props: Props) => {
       },
       pagination: {
         page: 1,
-        pageSize: 3
+        pageSize: 4
       },
-      sort: ["publishedAt:desc"],
+      sort: ["publish_date:desc"],
       populate: ["image", "category"]
     },
     {
@@ -133,13 +133,6 @@ export const HeaderMainMenuSubItem = component$((props: Props) => {
                   props.homepage?.attributes?.header_menu_add.html
                 }
               ></div>
-            </div>
-            <div class="row px-3">
-              <div class="col-12">
-                <ul class="list-inline mt-3">
-                  <li class="list-inline-item">Теги:</li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
