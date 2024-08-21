@@ -95,7 +95,7 @@ export const HeaderMainMenuSubItem = component$((props: Props) => {
                               .thumbnail.url ||
                             `/images/blog/4by3/thumb/0${index + 1}.jpg`
                           }
-                          alt={item.attributes?.image?.data?.attributes.name}
+                          alt={item.attributes?.image?.data?.attributes?.name}
                         />
                       </a>
                       <div class="card-body px-0 pt-3">
