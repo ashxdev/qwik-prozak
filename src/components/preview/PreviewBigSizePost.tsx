@@ -17,17 +17,18 @@ export const PreviewBigSizePost = (props: { post: PostI }) => {
       </span>
       <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
         <div class="w-100 mt-auto">
+          {props.post.attributes.name}
           <a
-            class={`badge ${props.post.attributes.category.data.attributes.slug} mb-2`}
-            href={`/${props.post.attributes.category.data.attributes.slug}/${props.post.attributes.slug}`}
+            class={`badge ${props.post.attributes?.category?.data?.attributes.slug} mb-2`}
+            href={`/${props.post.attributes?.category?.data?.attributes.slug}/${props.post.attributes.slug}`}
           >
             <i class="bi bi-circle-fill me-2 small fw-bold"></i>
-            {props.post.attributes.category.data.attributes.name}
+            {props.post.attributes?.category?.data?.attributes?.name}
           </a>
           <h2 class="text-white h1">
             <a
               class="btn-link stretched-link text-reset"
-              href={`/${props.post.attributes.category.data.attributes.slug}/${props.post.attributes.slug}`}
+              href={`/${props.post.attributes?.category?.data?.attributes.slug}/${props.post.attributes.slug}`}
             >
               {props.post.attributes.name}
             </a>
