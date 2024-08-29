@@ -8,7 +8,7 @@ export const PreviewMidSquareSizePost = (props: {
 }) => {
   const dayjs = useDayjs()
   const categorySlug = props.partner
-    ? "partner"
+    ? "Novini-partneriv"
     : props.post?.attributes?.category?.data.attributes.slug
 
   const categoryName = props.partner
