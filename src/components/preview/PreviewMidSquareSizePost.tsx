@@ -28,7 +28,7 @@ export const PreviewMidSquareSizePost = (props: {
         <img
           class="card-img"
           src={getImageSrc(props.post)}
-          alt={props.post.attributes.name}
+          alt={props.post.attributes?.name}
         />
         <div class="card-img-overlay d-flex align-items-start flex-column p-3">
           <div class="w-100 mt-auto">
