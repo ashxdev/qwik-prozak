@@ -29,7 +29,7 @@ export const LegacyPost2 = component$((props: { data: PostI }) => {
                 <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
                   <div class="w-100 my-auto">
                     <h2 class="text-white display-5">
-                      {props.data.attributes.name}
+                      {props.data?.attributes?.name}
                     </h2>
                     <ul class="nav nav-divider text-white-force align-items-center justify-content-center">
                       <li class="nav-item">
@@ -50,11 +50,11 @@ export const LegacyPost2 = component$((props: { data: PostI }) => {
           <div class="row">
             <div class="col-lg-9">
               <span class="ms-2 small">
-                {dayjs(props.data.attributes.publish_date).format(
+                {dayjs(props.data?.attributes?.publish_date).format(
                   "MMMM DD YYYY, H:mm"
                 )}
               </span>
-              <h1>{props.data.attributes.name}</h1>
+              <h1>{props.data?.attributes?.name}</h1>
 
               <p class="card-text">
                 {props.data?.attributes?.short_description
