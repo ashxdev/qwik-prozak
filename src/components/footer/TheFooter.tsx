@@ -3,6 +3,7 @@ import { FooterHotTopics } from "./FooterHotTopics"
 import { FooterCopyright } from "./FooterCopyright"
 import { FooterNavigation } from "./FooterNavigation"
 import { FooterRecentPost } from "./FooterRecentPost"
+import DLSBachataLadyStyleAdv from "~/components/adv/DLSBachataLadyStyleAdv"
 
 import qs from "qs"
 import { useStore, component$, useTask$ } from "@builder.io/qwik"
@@ -41,9 +42,7 @@ export const TheFooter = component$(
             <FooterNavigation categories={props.categories} />
 
             <div class="col-sm-6 col-lg-3 mb-4">
-              <a href="#">
-                <img class="w-100" alt="app-store" src="/images/adv.png" />
-              </a>
+              <DLSBachataLadyStyleAdv titleClass="text-white" />
             </div>
           </div>
 

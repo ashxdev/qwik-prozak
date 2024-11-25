@@ -3,6 +3,8 @@ import { get } from "lodash-es"
 import { useDayjs } from "~/composable/useDayjs"
 import { component$ } from "@builder.io/qwik"
 
+import DLSHighHeelsAdv from "~/components/adv/DLSHighHeelsAdv"
+
 export const PartnerPostsList = component$(
   (props: { partnerPosts: PostI[] }) => {
     const dayjs = useDayjs()
@@ -54,9 +56,7 @@ export const PartnerPostsList = component$(
           </div>
 
           <div class="col-12 col-sm-6 col-lg-12 my-4">
-            <a href="#" class="d-block card-img-flash">
-              <img src="/images/adv.png" alt="" />
-            </a>
+            <DLSHighHeelsAdv />
             <div class="smaller text-end mt-2">
               ads via{" "}
               <a href="#" class="text-body">
