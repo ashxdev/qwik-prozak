@@ -3,7 +3,7 @@ import { get } from "lodash-es"
 import { useDayjs } from "~/composable/useDayjs"
 import { component$ } from "@builder.io/qwik"
 
-import DLSHighHeelsAdv from "~/components/adv/DLSHighHeelsAdv"
+import DanceLineStudioRandomAdv from "~/components/adv/DanceLineStudioRandomAdv"
 
 export const PartnerPostsList = component$(
   (props: { partnerPosts: PostI[] }) => {
@@ -56,7 +56,7 @@ export const PartnerPostsList = component$(
           </div>
 
           <div class="col-12 col-sm-6 col-lg-12 my-4">
-            <DLSHighHeelsAdv />
+            <DanceLineStudioRandomAdv />
           </div>
         </div>
       </>

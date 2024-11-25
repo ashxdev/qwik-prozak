@@ -1,7 +1,7 @@
 import { component$ } from "@builder.io/qwik"
 import { usePostCategories } from "~/routes/[categorySlug]/[postSlug]/index"
 import CategorySideBarList from "~/components/category/CategorySideBarList.tsx"
-import DLSBachataCoupleAdv from "~/components/adv/DLSBachataCoupleAdv"
+import DanceLineStudioRandomAdv from "~/components/adv/DanceLineStudioRandomAdv"
 
 export const PostRightSideBar = component$(() => {
   const categories = usePostCategories()
@@ -38,7 +38,7 @@ export const PostRightSideBar = component$(() => {
       <CategorySideBarList categories={categories.value} />
       <div class="mt-4">
 
-        <DLSBachataCoupleAdv />
+        <DanceLineStudioRandomAdv />
 
       </div>
     </div>
