@@ -57,12 +57,6 @@ export const PartnerPostsList = component$(
 
           <div class="col-12 col-sm-6 col-lg-12 my-4">
             <DLSHighHeelsAdv />
-            <div class="smaller text-end mt-2">
-              ads via{" "}
-              <a href="#" class="text-body">
-                <u>Bootstrap</u>
-              </a>
-            </div>
           </div>
         </div>
       </>
