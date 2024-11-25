@@ -41,6 +41,8 @@ export default component$(
         <HeaderTopMenu />
 
         <HeaderMainMenu categories={categories} homepage={homepage} />
+
+        <meta name="google-adsense-account" content="ca-pub-3297522505307737"></meta>
       </header>
     )
   }
