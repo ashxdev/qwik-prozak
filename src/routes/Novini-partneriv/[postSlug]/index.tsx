@@ -1,18 +1,21 @@
 import qs from "qs"
 import { get } from "lodash-es"
-import { useLocation } from "@builder.io/qwik-city"
+import { PostI } from "~/types"
+
+
+import { routeLoader$ } from "@builder.io/qwik-city"
 import { PartnerPost } from "~/components/post/PartnerPost"
-import { useStore, component$, useTask$ } from "@builder.io/qwik"
+import { useSignal, component$, Resource } from "@builder.io/qwik"
+import type { DocumentHead } from "@builder.io/qwik-city"
 
-export default component$(() => {
-  const location = useLocation()
-  const store = useStore({ post: null } as any)
 
+
+export const useGetPostData = routeLoader$(async (requestEvent) => {
   const query = qs.stringify(
     {
       filters: {
         slug: {
-          $eq: location.params.postSlug
+          $eq: requestEvent.params.postSlug
         }
       },
       sort: ["publishedAt:desc"],
@@ -23,13 +26,64 @@ export default component$(() => {
     }
   )
 
-  useTask$(async () => {
-    const response = await fetch(
-      `${import.meta.env.VITE_STRAPI_DOCKER_URL}/partner-posts?${query}`
-    )
-    const result = await response.json()
-    store.post = get(result.data, "[0]")
-  })
+  const response = await fetch(
+    `${import.meta.env.VITE_STRAPI_DOCKER_URL}/partner-posts?${query}`
+  )
+  const result = await response.json()
+  const post = get(result.data, "[0]")
 
-  return <PartnerPost data={store.post} />
+  return post as PostI
 })
+
+
+export default component$(() => {
+  const getPostData = useGetPostData()
+  const postData = useSignal<PostI>(getPostData.value)
+
+  return (
+    <Resource
+      value={postData}
+      onPending={() => <div>Loading...</div>}
+      onResolved={(postData) => (
+        <PartnerPost data={postData} />
+      )}
+    />
+  )
+})
+
+
+export const head: DocumentHead = ({ resolveValue, params }) => {
+  const data = resolveValue(useGetPostData)
+
+  return {
+    title: `${data?.attributes?.name} - Прозак`,
+    meta: [
+      { content: data?.attributes?.name, key: "keywords" },
+      { content: data?.attributes?.short_description, key: "description" },
+      {
+        property: 'og:title',
+        content: data?.attributes?.name,
+      },
+      {
+        property: 'og:description',
+        content: data?.attributes?.short_description,
+      },
+      {
+        property: 'og:image',
+        content: data?.attributes.image?.data?.attributes.url,
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:site_name',
+        content: 'PROZAK.INFO',
+      },
+      {
+        property: 'og:url',
+        content: `${import.meta.env.VITE_SITE_URL}/Novini-partneriv/${params.postSlug}`,
+      },
+    ]
+  }
+}

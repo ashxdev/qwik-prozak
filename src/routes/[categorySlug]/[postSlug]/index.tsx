@@ -3,8 +3,8 @@ import { get } from "lodash-es"
 import { PostI, CategoryI } from "~/types"
 import { Post } from "~/components/post/Post"
 import { routeLoader$ } from "@builder.io/qwik-city"
-import { LegacyPost2 } from "~/components/post/LegacyPost2"
 import type { DocumentHead } from "@builder.io/qwik-city"
+import { LegacyPost2 } from "~/components/post/LegacyPost2"
 import { component$, useSignal, Resource } from "@builder.io/qwik"
 
 type PostData = { post: PostI | null; legacyPost: PostI }
@@ -94,7 +94,7 @@ export default component$(() => {
   )
 })
 
-export const head: DocumentHead = ({ resolveValue }) => {
+export const head: DocumentHead = ({ resolveValue, params }) => {
   const data = resolveValue(useGetPostData)
 
   // legacy title
@@ -114,7 +114,31 @@ export const head: DocumentHead = ({ resolveValue }) => {
     title: `${data?.post?.attributes?.name} - Прозак`,
     meta: [
       { content: data?.post?.attributes?.name, key: "keywords" },
-      { content: data?.post?.attributes?.short_description, key: "description" }
+      { content: data?.post?.attributes?.short_description, key: "description" },
+      {
+        property: 'og:title',
+        content: data?.post?.attributes?.name,
+      },
+      {
+        property: 'og:description',
+        content: data?.post?.attributes?.short_description,
+      },
+      {
+        property: 'og:image',
+        content: data?.post?.attributes.image.data.attributes.url,
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:site_name',
+        content: 'PROZAK.INFO',
+      },
+      {
+        property: 'og:url',
+        content: `${import.meta.env.VITE_SITE_URL}/${params.categorySlug}/${params.postSlug}`,
+      },
     ]
   }
 }
