@@ -1,14 +1,10 @@
 import qs from "qs"
 import { get } from "lodash-es"
 import { PostI } from "~/types"
-
-
 import { routeLoader$ } from "@builder.io/qwik-city"
 import { PartnerPost } from "~/components/post/PartnerPost"
 import { useSignal, component$, Resource } from "@builder.io/qwik"
 import type { DocumentHead } from "@builder.io/qwik-city"
-
-
 
 export const useGetPostData = routeLoader$(async (requestEvent) => {
   const query = qs.stringify(
@@ -35,7 +31,6 @@ export const useGetPostData = routeLoader$(async (requestEvent) => {
   return post as PostI
 })
 
-
 export default component$(() => {
   const getPostData = useGetPostData()
   const postData = useSignal<PostI>(getPostData.value)
@@ -50,7 +45,6 @@ export default component$(() => {
     />
   )
 })
-
 
 export const head: DocumentHead = ({ resolveValue, params }) => {
   const data = resolveValue(useGetPostData)
