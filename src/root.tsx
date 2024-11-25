@@ -22,6 +22,7 @@ export default component$(() => {
       <head>
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="google-adsense-account" content="ca-pub-3297522505307737"></meta>
         <RouterHead />
       </head>
       <body lang="en">
