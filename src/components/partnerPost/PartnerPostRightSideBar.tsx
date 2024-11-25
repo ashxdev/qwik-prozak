@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik"
-import DLSBachataLadyStyleAdv from "~/components/adv/DLSBachataLadyStyleAdv"
+import DanceLineStudioRandomAdv from "~/components/adv/DanceLineStudioRandomAdv"
 
 
 export const PartnerPostRightSideBar = component$(() => {
@@ -33,7 +33,7 @@ export const PartnerPostRightSideBar = component$(() => {
         </li>
       </ul>
       <div class="mt-4">
-        <DLSBachataLadyStyleAdv />
+        <DanceLineStudioRandomAdv />
       </div>
     </div>
   )

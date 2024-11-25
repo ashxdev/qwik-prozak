@@ -6,7 +6,7 @@ import type { DocumentHead } from "@builder.io/qwik-city"
 import { component$, Resource, useSignal } from "@builder.io/qwik"
 import { PreviewCardPost } from "~/components/preview/PreviewCardPost"
 import { SideBarCategoryList } from "~/components/side-bar/SideBarCategoryList"
-import DLSHighHeelsAdv from "~/components/adv/DLSHighHeelsAdv"
+import DanceLineStudioRandomAdv from "~/components/adv/DanceLineStudioRandomAdv"
 
 type CategoryData = { posts: PostI[] }
 
@@ -92,7 +92,7 @@ export default component$(() => {
 
                       <div class="row">
                         <div class="col-12 col-sm-6 col-lg-12 my-4">
-                          <DLSHighHeelsAdv />
+                          <DanceLineStudioRandomAdv />
                         </div>
                       </div>
                     </div>
