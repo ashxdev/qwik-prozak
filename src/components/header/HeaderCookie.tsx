@@ -10,7 +10,9 @@ export const HeaderCookie = component$(() => {
   })
 
   const handleSetCookie = $(() => {
-    document.cookie = "accepted_cookies=yes;"
+    const CookieDate = new Date
+    CookieDate.setFullYear(CookieDate.getFullYear() + 1)
+    document.cookie = `accepted_cookies=yes;expires=${CookieDate.toUTCString()};`
     store.isShowCookiePolice = false
   })
 
