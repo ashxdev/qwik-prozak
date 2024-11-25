@@ -2,6 +2,8 @@ import { CategoryI } from "~/types"
 import { component$ } from "@builder.io/qwik"
 import { usePostStyle } from "~/composable/usePostStyle"
 import CategorySideBarList from "./CategorySideBarList.tsx"
+import DLSContemporaryAdv from "~/components/adv/DLSContemporaryAdv.tsx"
+
 
 export default component$(
   (props: { categorySlug: string; categories: CategoryI[] }) => {
@@ -11,9 +13,8 @@ export default component$(
       <div data-sticky data-margin-top="80" data-sticky-for="767">
         <CategorySideBarList categories={props.categories} />
         <div class="col-12 col-sm-6 col-lg-12 my-4">
-          <a href="#" class="d-block card-img-flash">
-            <img src="/images/adv.png" alt="adv" />
-          </a>
+          <DLSContemporaryAdv />
+
           <div class="text-end mt-2">
             <a href="/all-posts" class="text-muted">
               <u>Усі новини</u>

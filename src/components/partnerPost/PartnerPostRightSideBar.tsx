@@ -1,4 +1,6 @@
 import { component$ } from "@builder.io/qwik"
+import DLSBachataLadyStyleAdv from "~/components/adv/DLSBachataLadyStyleAdv"
+
 
 export const PartnerPostRightSideBar = component$(() => {
   return (
@@ -31,9 +33,7 @@ export const PartnerPostRightSideBar = component$(() => {
         </li>
       </ul>
       <div class="mt-4">
-        <a href="#" class="d-block card-img-flash">
-          <img src="/images/adv.png" alt="as" />
-        </a>
+        <DLSBachataLadyStyleAdv />
       </div>
     </div>
   )

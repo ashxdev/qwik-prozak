@@ -6,6 +6,7 @@ import type { DocumentHead } from "@builder.io/qwik-city"
 import { component$, Resource, useSignal } from "@builder.io/qwik"
 import { PreviewCardPost } from "~/components/preview/PreviewCardPost"
 import { SideBarCategoryList } from "~/components/side-bar/SideBarCategoryList"
+import DLSHighHeelsAdv from "~/components/adv/DLSHighHeelsAdv"
 
 type CategoryData = { posts: PostI[] }
 
@@ -91,15 +92,7 @@ export default component$(() => {
 
                       <div class="row">
                         <div class="col-12 col-sm-6 col-lg-12 my-4">
-                          <a href="/" class="d-block card-img-flash">
-                            <img src="/images/adv.png" alt="adv" />
-                          </a>
-                          <div class="smaller text-end mt-2">
-                            ads via{" "}
-                            <a href="#" class="text-muted">
-                              <u>Bootstrap</u>
-                            </a>
-                          </div>
+                          <DLSHighHeelsAdv />
                         </div>
                       </div>
                     </div>
