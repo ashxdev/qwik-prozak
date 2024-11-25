@@ -2,7 +2,7 @@ import { CategoryI } from "~/types"
 import { component$ } from "@builder.io/qwik"
 import { usePostStyle } from "~/composable/usePostStyle"
 import CategorySideBarList from "./CategorySideBarList.tsx"
-import DLSContemporaryAdv from "~/components/adv/DLSContemporaryAdv.tsx"
+import DanceLineStudioRandomAdv from "~/components/adv/DanceLineStudioRandomAdv.tsx"
 
 
 export default component$(
@@ -13,7 +13,7 @@ export default component$(
       <div data-sticky data-margin-top="80" data-sticky-for="767">
         <CategorySideBarList categories={props.categories} />
         <div class="col-12 col-sm-6 col-lg-12 my-4">
-          <DLSContemporaryAdv />
+          <DanceLineStudioRandomAdv />
 
           <div class="text-end mt-2">
             <a href="/all-posts" class="text-muted">
