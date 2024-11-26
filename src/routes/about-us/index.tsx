@@ -74,13 +74,8 @@ export const head: DocumentHead = {
   title: "Про нас - Прозак",
   meta: [
     {
-      key: "keywords",
-      content:
-        "Prozak, прозак, портал про Закарпаття, новини, новини Ужгород, прозак, прозак інфо, про закарпаття, прозак інформаційний антидепресант, prozak.info"
-    },
-    {
-      key: "description",
-      content: "Інформаційний портал про Закарпаття"
+      name: "description",
+      content: "Prozak.info - Інформаційний портал про Закарпаття"
     }
   ]
 }

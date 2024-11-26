@@ -38,10 +38,9 @@ export const head: DocumentHead = ({ resolveValue }) => {
   return {
     title: `${data?.category?.attributes?.name} - Прозак`,
     meta: [
-      { content: data?.category?.attributes?.name, key: "keywords" },
       {
         content: data?.category?.attributes?.short_description,
-        key: "description"
+        name: "description"
       }
     ]
   }

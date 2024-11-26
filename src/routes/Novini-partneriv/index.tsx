@@ -78,10 +78,9 @@ export const head: DocumentHead = () => {
   return {
     title: "Новини партнерів - Прозак",
     meta: [
-      { key: "keywords", content: "новини партнерів прозак" },
       {
-        key: "description",
-        content: "Новини партнерів"
+        name: "description",
+        content: "Prozak.info - Новини партнерів"
       }
     ]
   }

@@ -104,8 +104,7 @@ export const head: DocumentHead = ({ resolveValue }) => {
     return {
       title: `${title} - Прозак`,
       meta: [
-        { content: title, key: "keywords" },
-        { content: title, key: "description" }
+        { content: title, name: "description" }
       ]
     }
   }
@@ -113,8 +112,7 @@ export const head: DocumentHead = ({ resolveValue }) => {
   return {
     title: `${data?.post?.attributes?.name} - Прозак`,
     meta: [
-      { content: data?.post?.attributes?.name, key: "keywords" },
-      { content: data?.post?.attributes?.short_description, key: "description" }
+      { content: data?.post?.attributes?.short_description, name: "description" }
     ]
   }
 }
