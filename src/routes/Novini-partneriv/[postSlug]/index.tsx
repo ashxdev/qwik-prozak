@@ -52,7 +52,7 @@ export const head: DocumentHead = ({ resolveValue, params }) => {
   return {
     title: `${data?.attributes?.name} - Прозак`,
     meta: [
-      { content: data?.attributes?.short_description, name: "description" },
+      { content: data?.attributes?.short_description || '', name: "description" },
       {
         property: 'og:title',
         content: data?.attributes?.name,

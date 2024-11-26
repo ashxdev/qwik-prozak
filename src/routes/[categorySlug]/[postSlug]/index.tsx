@@ -104,8 +104,8 @@ export const head: DocumentHead = ({ resolveValue, params }) => {
     return {
       title: `${title} - Прозак`,
       meta: [
-        { content: title, key: "keywords" },
-        { content: title, key: "description" }
+        { content: title, name: "keywords" },
+        { content: title, name: "description" }
       ]
     }
   }

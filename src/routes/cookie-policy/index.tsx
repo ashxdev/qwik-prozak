@@ -538,13 +538,8 @@ export const head: DocumentHead = {
   title: "Використання файлів cookie - Прозак",
   meta: [
     {
-      key: "keywords",
-      content:
-        "Prozak, прозак, портал про Закарпаття, новини, новини Ужгород, прозак, прозак інфо, про закарпаття, прозак інформаційний антидепресант, prozak.info"
-    },
-    {
-      key: "description",
-      content: "Інформаційний портал про Закарпаття, Використання файлів cookie"
+      name: "description",
+      content: "Prozak.info - Інформаційний портал про Закарпаття, Використання файлів cookie"
     }
   ]
 }
