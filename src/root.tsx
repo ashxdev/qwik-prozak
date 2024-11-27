@@ -23,6 +23,8 @@ export default component$(() => {
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="google-adsense-account" content="ca-pub-3297522505307737"></meta>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3297522505307737"
+          crossOrigin="anonymous"></script>
         <RouterHead />
       </head>
       <body lang="en">
