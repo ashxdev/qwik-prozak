@@ -83,6 +83,18 @@ export const PartnerPost = component$((props: { data: PostI }) => {
               dangerouslySetInnerHTML={props.data?.attributes?.description}
             ></div>
 
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3297522505307737"
+              crossOrigin="anonymous"></script>
+            <ins class="adsbygoogle"
+              style="display:block"
+              data-ad-client="ca-pub-3297522505307737"
+              data-ad-slot="3536841823"
+              data-ad-format="auto"
+              data-full-width-responsive="true"></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({ });
+            </script>
+
             <div class="col-lg-3">
               <PartnerPostRightSideBar />
             </div>
