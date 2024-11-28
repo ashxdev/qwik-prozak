@@ -35,6 +35,20 @@ export const PartnerPostRightSideBar = component$(() => {
       <div class="mt-4">
         <DanceLineStudioRandomAdv />
       </div>
+
+      <div class="mt-4">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3297522505307737"
+          crossOrigin="anonymous"></script>
+        <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-3297522505307737"
+          data-ad-slot="3881119466"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({ });
+        </script>
+      </div>
     </div>
   )
 })
