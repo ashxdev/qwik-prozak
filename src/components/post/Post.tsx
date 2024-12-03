@@ -95,9 +95,6 @@ export const Post = component$((props: { data: PostI }) => {
                 data-ad-slot="3536841823"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({ });
-              </script>
             </div>
 
             <div class="col-lg-3">
